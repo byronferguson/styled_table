@@ -8,7 +8,6 @@ const fields = [
     title: 'Locations',
     hint: '',
   },
-  ,
   {
     title: 'Total Sales',
     hint: '',
@@ -183,8 +182,8 @@ function formatPercent(value, precision = 0) {
       </tr>
       <tr>
         <th
-          v-for="(field, idx) in fields"
-          :key="`${field.slug}-${idx}`"
+          v-for="(field, fieldIndex) in fields"
+          :key="`${field.title}-${fieldIndex}`"
           :data-group="field.group"
         >
           {{ field.title }}
@@ -211,7 +210,6 @@ function formatPercent(value, precision = 0) {
       </tr>
     </tbody>
   </table>
-  <pre>{{ data }}</pre>
 </template>
 
 <style lang="postcss">
