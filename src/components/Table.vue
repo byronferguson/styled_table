@@ -144,6 +144,19 @@ const data = computed(() => {
   return promoData.value.map((record) => Object.values(record));
 });
 
+function formatField(value, config) {
+  const FORMATTERS = {
+    current: formatCurrency,
+    percent: formatPercent,
+    integer: (val) => val,
+    string: (val) => val,
+  };
+
+  const { format = 'string', scale } = config;
+
+  return FORMATTERS[format](value);
+}
+
 function formatCurrency(value, currency = 'USD', i18n = 'en-US') {
   return new Intl.NumberFormat(i18n, {
     style: 'currency',
@@ -187,8 +200,8 @@ function formatPercent(value, precision = 0) {
         <td>{{ formatPercent(data.schedulePercent) }}</td>
       </tr> -->
       <tr v-for="(record, recordIndex) in data" :key="recordIndex">
-        <td v-for="(field, fieldIndex) in record" :key="fieldIndex">
-          {{ field }}
+        <td v-for="(fieldValue, fieldIndex) in record" :key="fieldIndex">
+          {{ formatField(fieldValue, fields[fieldIndex]) }}
         </td>
       </tr>
     </tbody>
