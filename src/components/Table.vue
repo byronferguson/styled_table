@@ -5,6 +5,11 @@ const title = 'Promo Sales';
 
 const fields = [
   {
+    title: 'Locations',
+    hint: '',
+  },
+  ,
+  {
     title: 'Total Sales',
     hint: '',
     format: 'currency',
@@ -154,7 +159,7 @@ function formatField(value, config) {
 
   const { format = 'string', scale } = config;
 
-  return FORMATTERS?.[format](value) ?? value;
+  return FORMATTERS?.[format]?.(value) ?? value;
 }
 
 function formatCurrency(value, currency = 'USD', i18n = 'en-US') {
@@ -201,7 +206,7 @@ function formatPercent(value, precision = 0) {
       </tr> -->
       <tr v-for="(record, recordIndex) in data" :key="recordIndex">
         <td v-for="(fieldValue, fieldIndex) in record" :key="fieldIndex">
-          {{ formatField(fieldValue, fields[fieldIndex]) }}
+          {{ formatField(fieldValue, fields[1]) }}
         </td>
       </tr>
     </tbody>
