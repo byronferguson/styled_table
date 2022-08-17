@@ -140,6 +140,10 @@ const promoData = ref([
   },
 ]);
 
+const data = computed(() => {
+  return promoData.value.map((record) => Object.values(record));
+});
+
 function formatCurrency(value, currency = 'USD', i18n = 'en-US') {
   return new Intl.NumberFormat(i18n, {
     style: 'currency',
@@ -171,7 +175,7 @@ function formatPercent(value, precision = 0) {
     </thead>
 
     <tbody>
-      <tr v-for="data in promoData" :key="data.locationName">
+      <!-- <tr v-for="data in promoData" :key="data.locationName">
         <td>{{ data.locationName }}</td>
         <td>{{ formatCurrency(data.salesTotal) }}</td>
         <td>{{ formatCurrency(data.salesGoal) }}</td>
@@ -181,9 +185,15 @@ function formatPercent(value, precision = 0) {
         <td>{{ formatPercent(data.schedulePercent) }}</td>
         <td>{{ data.withdrawals }}</td>
         <td>{{ formatPercent(data.schedulePercent) }}</td>
+      </tr> -->
+      <tr v-for="(record, recordIndex) in data" :key="recordIndex">
+        <td v-for="(field, fieldIndex) in record" :key="fieldIndex">
+          {{ field }}
+        </td>
       </tr>
     </tbody>
   </table>
+  <pre>{{ data }}</pre>
 </template>
 
 <style lang="postcss">
