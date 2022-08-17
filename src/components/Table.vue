@@ -1,6 +1,65 @@
 <script setup>
 import { computed, ref } from 'vue';
 
+const title = 'Promo Sales';
+
+const fields = [
+  {
+    title: 'Total Sales',
+    hint: '',
+    format: 'currency',
+    scale: 0,
+    group: 1,
+  },
+  {
+    title: 'Goal Sales',
+    hint: '',
+    format: 'currency',
+    scale: 0,
+    group: 1,
+  },
+  {
+    title: '% to Goal',
+    hint: '',
+    format: 'percent',
+    scale: 0,
+    group: 1,
+  },
+  {
+    title: 'Avg. Sales Per Day',
+    hint: '',
+    format: 'currency',
+    scale: 0,
+    group: 1,
+  },
+  {
+    title: 'Total Scheduled',
+    hint: '',
+    format: 'integer',
+    group: 2,
+  },
+  {
+    title: '% Scheduled',
+    hint: '',
+    format: 'percent',
+    scale: 0,
+    group: 2,
+  },
+  {
+    title: '# of Withdrawels',
+    hint: '',
+    format: 'integer',
+    group: 3,
+  },
+  {
+    title: 'Total Sales',
+    hint: '',
+    format: 'currency',
+    scale: 0,
+    group: 3,
+  },
+];
+
 const promoData = ref([
   {
     locationName: 'Buffalo Grove',
@@ -101,14 +160,13 @@ function formatPercent(value, precision = 0) {
         <th colspan="8">Promo Sales</th>
       </tr>
       <tr>
-        <th class="data-group-1">Total Sales</th>
-        <th class="data-group-1">Goal Sales</th>
-        <th class="data-group-1">% to Goal</th>
-        <th class="data-group-1">Avg. Sales Per Day</th>
-        <th class="data-group-2">Total Scheduled</th>
-        <th class="data-group-2">% Scheduled</th>
-        <th class="data-group-3"># of Withdrawels</th>
-        <th class="data-group-3">% Withdrawn</th>
+        <th
+          v-for="(field, idx) in fields"
+          :key="`${field.slug}-${idx}`"
+          :data-group="field.group"
+        >
+          {{ field.title }}
+        </th>
       </tr>
     </thead>
 
@@ -162,17 +220,17 @@ thead th {
   width: 11%;
 }
 
-.data-group-1 {
+thead th[data-group='1'] {
   background-color: #2157d6;
   color: white;
 }
 
-.data-group-2 {
+thead th[data-group='2'] {
   background-color: #ffcf34;
   color: #1f145d;
 }
 
-.data-group-3 {
+thead th[data-group='3'] {
   background-color: #f8564b;
   color: white;
 }
