@@ -154,7 +154,7 @@ function formatField(value, config) {
 
   const { format = 'string', scale } = config;
 
-  return FORMATTERS[format](value);
+  return FORMATTERS?.[format](value) ?? value;
 }
 
 function formatCurrency(value, currency = 'USD', i18n = 'en-US') {
