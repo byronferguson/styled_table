@@ -7,6 +7,10 @@ const props = defineProps({
   data: Array,
 });
 
+const fieldsArr = computed(() => {
+  return props.title ? props.field.slice(1) : props.field;
+});
+
 const dataArr = computed(() => {
   return props.data.map((record) => Object.values(record));
 });
@@ -18,6 +22,7 @@ function formatField(value, config) {
 
   const FORMATTERS = {
     currency: formatCurrency,
+    currencyCompact: formatCurrencyCompact,
     percent: formatPercent,
     string: (val) => val,
     integer: (val) => val.toFixed(0),
@@ -33,6 +38,12 @@ function formatCurrency(value, currency = 'USD', i18n = 'en-US') {
   }).format(value);
 }
 
+// Currently "dumb" for only thousands
+function formatCurrencyCompact(value) {
+  const _value = Math.floor(value / 1000);
+  return `$${_value}K`;
+}
+
 function formatPercent(value, precision = 0) {
   return (value * 100).toFixed(precision) + '%';
 }
@@ -41,13 +52,13 @@ function formatPercent(value, precision = 0) {
 <template>
   <table>
     <thead>
-      <tr>
-        <th rowspan="2">{{ fields[0].title }}</th>
+      <tr v-if="title">
+        <th :rowspan="2">{{ fields[0].title }}</th>
         <th :colspan="titleColspan">{{ title }}</th>
       </tr>
       <tr>
         <th
-          v-for="(field, fieldIndex) in fields.slice(1)"
+          v-for="(field, fieldIndex) in fieldsArr.slice(1)"
           :key="`${field.title}-${fieldIndex}`"
           :data-group="field.group"
         >
@@ -113,6 +124,11 @@ thead th[data-group='2'] {
 thead th[data-group='3'] {
   background-color: #f8564b;
   color: white;
+}
+
+thead th[data-group='4'] {
+  background-color: #99e3fa;
+  color: #1f145d;
 }
 
 tbody tr:nth-child(odd) {

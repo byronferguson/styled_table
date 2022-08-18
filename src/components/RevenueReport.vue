@@ -11,36 +11,31 @@ const fields = [
   {
     title: 'Baby Blue Rev',
     hint: '',
-    format: 'currency',
-    scale: 0,
-    group: 1,
+    format: 'currencyCompact',
+    group: 3,
   },
   {
     title: 'Bright Blue Rev',
     hint: '',
-    format: 'currency',
-    scale: 0,
-    group: 1,
+    format: 'currencyCompact',
+    group: 2,
   },
   {
     title: 'Bold Blue Rev',
     hint: '',
-    format: 'percent',
-    scale: 0,
-    group: 1,
+    format: 'currencyCompact',
+    group: 4,
   },
   {
     title: 'Big Blue Rev',
     hint: '',
-    format: 'currency',
-    scale: 0,
+    format: 'currencyCompact',
     group: 1,
   },
   {
     title: 'Total Revenue',
     hint: '',
-    format: 'integer',
-    group: 2,
+    format: 'currencyCompact',
   },
 ];
 
@@ -58,6 +53,6 @@ const data = [
 
 <template>
   <main>
-    <Table :title="title" :fields="fields" :data="data" />
+    <Table :fields="fields" :data="data" />
   </main>
 </template>
