@@ -137,7 +137,9 @@ function formatPercent(value, scale = 0) {
           <template v-if="isPrimitiveValue(fieldValue)">
             {{ formatField(fieldValue, fields[fieldIndex]) }}
           </template>
-          <template v-else> ¿? </template>
+          <template v-else>
+            {{ formatField(fieldValue.value, fields[fieldIndex]) }}
+          </template>
         </component>
       </tr>
     </tbody>

@@ -46,7 +46,7 @@ const data = [
     shiftName: 'Weekend AM',
     babyBlueRevenue: 5500,
     brightBlueRevenue: 40000,
-    boldBlueRevenue: 40000,
+    boldBlueRevenue: 4500,
     bigBlueRevenue: 15000,
     totalRevenue: 1111001,
   },
