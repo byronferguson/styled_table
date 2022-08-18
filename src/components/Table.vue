@@ -151,15 +151,15 @@ const data = computed(() => {
 const titleColspan = computed(() => fields.length - 1);
 
 function formatField(value, config) {
+  const { format = 'string', scale = 1 } = config;
+
   const FORMATTERS = {
-    current: formatCurrency,
+    currency: formatCurrency,
     percent: formatPercent,
-    integer: (val) => val,
     string: (val) => val,
+    integer: (val) => val,
+    decimal: (val) => val.toFixed(scale),
   };
-
-  const { format = 'string', scale } = config;
-
   return FORMATTERS?.[format]?.(value) ?? value;
 }
 
@@ -207,7 +207,7 @@ function formatPercent(value, precision = 0) {
       </tr> -->
       <tr v-for="(record, recordIndex) in data" :key="recordIndex">
         <td v-for="(fieldValue, fieldIndex) in record" :key="fieldIndex">
-          {{ formatField(fieldValue, fields[1]) }}
+          {{ formatField(fieldValue, fields[fieldIndex]) }}
         </td>
       </tr>
     </tbody>
