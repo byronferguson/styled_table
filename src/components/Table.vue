@@ -4,18 +4,29 @@ import { computed, ref, defineProps } from 'vue';
 const props = defineProps({
   title: String,
   fields: Array,
+  fieldDescriptions: Array,
   data: Array,
 });
 
 const fieldsArr = computed(() => {
-  return props.title ? props.fields.slice(1) : props.fields;
+  return props.fields.slice(1);
 });
 
 const dataArr = computed(() => {
   return props.data.map((record) => Object.values(record));
 });
 
-const titleColspan = computed(() => props.fields.length - 1);
+const hasSubTitles = computed(() =>
+  props.fields.some((field) => field.subTitle)
+);
+
+const titleColSpan = computed(() => props.fields.length - 1);
+const titleRowSpan = computed(() => {
+  const initialSpan = props.title ? 2 : 1;
+  const subTitleOffest = hasSubTitles.value ? 1 : 0;
+
+  return initialSpan + subTitleOffest;
+});
 
 const colWidth = computed(() => `${100 / props.fields.length}%`);
 
@@ -51,7 +62,6 @@ function formatCurrency(value, scale, currency = 'USD', i18n = 'en-US') {
     : fractionFormatter.format(value);
 }
 
-// Currently "dumb" for only thousands
 function formatCurrencyCompact(value, scale = 2) {
   let suffix;
   let _value;
@@ -89,18 +99,29 @@ function formatPercent(value, scale = 0) {
   <table>
     <thead>
       <tr v-if="title">
-        <th :rowspan="2">{{ fields[0].title }}</th>
-        <th :colspan="titleColspan">{{ title }}</th>
+        <th :rowspan="titleRowSpan">{{ fields[0].title }}</th>
+        <th :colspan="titleColSpan">{{ title }}</th>
       </tr>
       <tr>
+        <th v-if="!title" :rowspan="titleRowSpan">
+          {{ fields[0].title }}
+        </th>
         <th
-          v-for="(field, fieldIndex) in fieldsArr"
+          v-for="(field, fieldIndex) in fields.slice(1)"
           :key="`${field.title}-${fieldIndex}`"
           :data-group="field.group"
           :data-color="field.color"
         >
           {{ field.title }}
         </th>
+      </tr>
+      <tr v-if="hasSubTitles">
+        <td
+          v-for="(field, fieldIndex) in fields.slice(1)"
+          :key="`${field.title}-${fieldIndex}`"
+        >
+          {{ field.subTitle }}
+        </td>
       </tr>
     </thead>
 
@@ -151,6 +172,13 @@ td {
 
 thead th {
   width: v-bind(colWidth);
+}
+
+thead td {
+  background-color: #ccc;
+  color: #1f145d;
+  font-size: 0.85rem;
+  font-weight: 400;
 }
 
 thead tr:first-of-type th:first-of-type {

@@ -90,34 +90,47 @@ const topFields = [
   },
   {
     title: 'Active Revenue',
+    subTitle: 'Revenue received on the 1st for lessons occuring this month',
     tooltip: 'Revenue received on the 1st for lessons occuring this month',
     format: 'currencyCompact',
     color: 'blue',
   },
   {
     title: 'New Revenue',
+    subTitle: 'Revenue received mid-month for lesson occurring this month',
     tooltip: 'Revenue received mid-month for lesson occurring this month',
     format: 'currencyCompact',
     color: 'blue',
   },
   {
     title: 'Deferred Revenue',
+    subTitle: 'Revenue previously received for lessons occuring this month',
     tooltip: 'Revenue previously received for lessons occuring this month',
     format: 'currencyCompact',
     color: 'blue',
   },
   {
     title: 'Total Revenue',
+    subTitle: 'Total revenue received for the lessons occurring this month',
     tooltip: 'Total revenue received for the lessons occurring this month',
     format: 'currencyCompact',
     color: 'blue',
   },
   {
     title: 'Future Revenue',
+    subTitle: 'Revenue received mid-month for lessons in future months',
     tooltip: 'Revenue received mid-month for lessons in future months',
     format: 'currencyCompact',
     color: 'yellow',
   },
+];
+
+const topFieldDescriptions = [
+  'Revenue received on the 1st for lessons occuring this month',
+  'Revenue received mid-month for lesson occurring this month',
+  'Revenue previously received for lessons occuring this month',
+  'Total revenue received for the lessons occurring this month',
+  'Revenue received mid-month for lessons in future months',
 ];
 
 const topData = [
