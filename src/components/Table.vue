@@ -61,6 +61,7 @@ function formatPercent(value, precision = 0) {
           v-for="(field, fieldIndex) in fieldsArr"
           :key="`${field.title}-${fieldIndex}`"
           :data-group="field.group"
+          :data-color="field.color"
         >
           {{ field.title }}
         </th>
@@ -115,23 +116,33 @@ thead th {
   width: 11%;
 }
 
-thead th[data-group='1'] {
+thead th[data-color='dark-blue'] {
+  background-color: #1f145d;
+  color: white;
+}
+
+thead th[data-color='blue'] {
   background-color: #2157d6;
   color: white;
 }
 
-thead th[data-group='2'] {
-  background-color: #ffcf34;
+thead th[data-color='light-blue'] {
+  background-color: #99e3fa;
   color: #1f145d;
 }
 
-thead th[data-group='3'] {
+thead th[data-color='red'] {
   background-color: #f8564b;
   color: white;
 }
 
-thead th[data-group='4'] {
-  background-color: #99e3fa;
+thead th[data-color='pink'] {
+  background-color: #ffd0d3;
+  color: #1f145d;
+}
+
+thead th[data-color='yellow'] {
+  background-color: #ffcf34;
   color: #1f145d;
 }
 
