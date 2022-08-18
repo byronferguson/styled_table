@@ -48,11 +48,43 @@ const data = [
     bigBlueRevenue: 15000,
     totalRevenue: 100000,
   },
+  {
+    shiftName: 'Weekend AM',
+    babyBlueRevenue: 5000,
+    brightBlueRevenue: 40000,
+    boldBlueRevenue: 40000,
+    bigBlueRevenue: 15000,
+    totalRevenue: 100000,
+  },
+  {
+    shiftName: 'Weekend AM',
+    babyBlueRevenue: 5000,
+    brightBlueRevenue: 40000,
+    boldBlueRevenue: 40000,
+    bigBlueRevenue: 15000,
+    totalRevenue: 100000,
+  },
+  {
+    shiftName: 'Weekend AM',
+    babyBlueRevenue: 5000,
+    brightBlueRevenue: 40000,
+    boldBlueRevenue: 40000,
+    bigBlueRevenue: 15000,
+    totalRevenue: 100000,
+  },
+  {
+    shiftName: 'Total',
+    babyBlueRevenue: 5000,
+    brightBlueRevenue: 40000,
+    boldBlueRevenue: 40000,
+    bigBlueRevenue: 15000,
+    totalRevenue: 100000,
+  },
 ];
 </script>
 
 <template>
   <main>
-    <Table :fields="fields" :data="data" />
+    <Table :title="title" :fields="fields" :data="data" />
   </main>
 </template>

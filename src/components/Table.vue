@@ -8,7 +8,7 @@ const props = defineProps({
 });
 
 const fieldsArr = computed(() => {
-  return props.title ? props.field.slice(1) : props.field;
+  return props.title ? props.fields.slice(1) : props.fields;
 });
 
 const dataArr = computed(() => {
@@ -58,7 +58,7 @@ function formatPercent(value, precision = 0) {
       </tr>
       <tr>
         <th
-          v-for="(field, fieldIndex) in fieldsArr.slice(1)"
+          v-for="(field, fieldIndex) in fieldsArr"
           :key="`${field.title}-${fieldIndex}`"
           :data-group="field.group"
         >
@@ -69,9 +69,13 @@ function formatPercent(value, precision = 0) {
 
     <tbody>
       <tr v-for="(record, recordIndex) in dataArr" :key="recordIndex">
-        <td v-for="(fieldValue, fieldIndex) in record" :key="fieldIndex">
+        <component
+          :is="fieldIndex === 0 ? 'th' : 'td'"
+          v-for="(fieldValue, fieldIndex) in record"
+          :key="fieldIndex"
+        >
           {{ formatField(fieldValue, fields[fieldIndex]) }}
-        </td>
+        </component>
       </tr>
     </tbody>
   </table>
@@ -129,6 +133,10 @@ thead th[data-group='3'] {
 thead th[data-group='4'] {
   background-color: #99e3fa;
   color: #1f145d;
+}
+
+tbody th {
+  text-align: left;
 }
 
 tbody tr:nth-child(odd) {
