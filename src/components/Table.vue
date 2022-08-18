@@ -62,9 +62,12 @@ function formatCurrencyCompact(value, scale = 2) {
   if (mValue >= 1) {
     _value = mValue;
     suffix = 'M';
-  } else {
+  } else if (kValue >= 1) {
     _value = kValue;
     suffix = 'K';
+  } else {
+    _value = value;
+    suffix = '';
   }
 
   const fixedValue = new Intl.NumberFormat('en-us', {
