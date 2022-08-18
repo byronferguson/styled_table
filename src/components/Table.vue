@@ -148,6 +148,8 @@ const data = computed(() => {
   return promoData.value.map((record) => Object.values(record));
 });
 
+const titleColspan = computed(() => fields.length - 1);
+
 function formatField(value, config) {
   const FORMATTERS = {
     current: formatCurrency,
@@ -177,12 +179,12 @@ function formatPercent(value, precision = 0) {
   <table>
     <thead>
       <tr>
-        <th rowspan="2">Locations</th>
-        <th colspan="8">Promo Sales</th>
+        <th rowspan="2">{{ fields[0].title }}</th>
+        <th :colspan="titleColspan">{{ title }}</th>
       </tr>
       <tr>
         <th
-          v-for="(field, fieldIndex) in fields"
+          v-for="(field, fieldIndex) in fields.slice(1)"
           :key="`${field.title}-${fieldIndex}`"
           :data-group="field.group"
         >
