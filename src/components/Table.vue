@@ -147,11 +147,6 @@ tbody tr:nth-child(even) {
   background-color: #ccc;
 }
 
-tbody tr:hover td {
-  background-color: #ffcf34;
-  font-weight: 900;
-}
-
 /* tbody th {
   background-color: #36c;
   color: white;
@@ -161,4 +156,15 @@ tbody tr:hover td {
 tbody tr:nth-child(even) th {
   background-color: #25c;
 } */
+
+tbody tr:hover th {
+  background-color: #ffcf34;
+  font-weight: 900;
+  color: #1f145d;
+}
+
+tbody tr:hover td {
+  background-color: #ffcf34;
+  font-weight: 900;
+}
 </style>
