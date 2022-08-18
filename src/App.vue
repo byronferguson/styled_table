@@ -64,7 +64,7 @@ const fields = [
   },
 ];
 
-const data = ref([
+const data = [
   {
     locationName: 'Buffalo Grove',
     salesTotal: 90,
@@ -142,7 +142,7 @@ const data = ref([
     withdrawals: 5,
     withdrawalsPercent: 0.15,
   },
-]);
+];
 </script>
 
 <template>
