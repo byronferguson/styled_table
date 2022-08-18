@@ -1,154 +1,17 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, defineProps } from 'vue';
 
-const title = 'Promo Sales';
-
-const fields = [
-  {
-    title: 'Locations',
-    hint: '',
-  },
-  {
-    title: 'Total Sales',
-    hint: '',
-    format: 'currency',
-    scale: 0,
-    group: 1,
-  },
-  {
-    title: 'Goal Sales',
-    hint: '',
-    format: 'currency',
-    scale: 0,
-    group: 1,
-  },
-  {
-    title: '% to Goal',
-    hint: '',
-    format: 'percent',
-    scale: 0,
-    group: 1,
-  },
-  {
-    title: 'Avg. Sales Per Day',
-    hint: '',
-    format: 'currency',
-    scale: 0,
-    group: 1,
-  },
-  {
-    title: 'Total Scheduled',
-    hint: '',
-    format: 'integer',
-    group: 2,
-  },
-  {
-    title: '% Scheduled',
-    hint: '',
-    format: 'percent',
-    scale: 0,
-    group: 2,
-  },
-  {
-    title: '# of Withdrawels',
-    hint: '',
-    format: 'integer',
-    group: 3,
-  },
-  {
-    title: 'Total Sales',
-    hint: '',
-    format: 'currency',
-    scale: 0,
-    group: 3,
-  },
-];
-
-const promoData = ref([
-  {
-    locationName: 'Buffalo Grove',
-    salesTotal: 90,
-    salesGoal: 100,
-    goalPercent: 0.9,
-    salesAverage: 10,
-    scheduleTotal: 10,
-    schedulePercent: 0.5,
-    withdrawals: 5,
-    withdrawalsPercent: 0.15,
-  },
-  {
-    locationName: 'Chicago - North Center',
-    salesTotal: 90,
-    salesGoal: 100,
-    goalPercent: 0.9,
-    salesAverage: 10,
-    scheduleTotal: 10,
-    schedulePercent: 0.5,
-    withdrawals: 5,
-    withdrawalsPercent: 0.15,
-  },
-  {
-    locationName: 'Hoffman Estates',
-    salesTotal: 90,
-    salesGoal: 100,
-    goalPercent: 0.9,
-    salesAverage: 10,
-    scheduleTotal: 10,
-    schedulePercent: 0.5,
-    withdrawals: 5,
-    withdrawalsPercent: 0.15,
-  },
-  {
-    locationName: 'Niles',
-    salesTotal: 90,
-    salesGoal: 100,
-    goalPercent: 0.9,
-    salesAverage: 10,
-    scheduleTotal: 10,
-    schedulePercent: 0.5,
-    withdrawals: 5,
-    withdrawalsPercent: 0.15,
-  },
-  {
-    locationName: 'Wilmette',
-    salesTotal: 90,
-    salesGoal: 100,
-    goalPercent: 0.9,
-    salesAverage: 10,
-    scheduleTotal: 10,
-    schedulePercent: 0.5,
-    withdrawals: 5,
-    withdrawalsPercent: 0.15,
-  },
-  {
-    locationName: 'Johns Creek',
-    salesTotal: 90,
-    salesGoal: 100,
-    goalPercent: 0.9,
-    salesAverage: 10,
-    scheduleTotal: 10,
-    schedulePercent: 0.5,
-    withdrawals: 5,
-    withdrawalsPercent: 0.15,
-  },
-  {
-    locationName: 'Total',
-    salesTotal: 90,
-    salesGoal: 100,
-    goalPercent: 0.9,
-    salesAverage: 10,
-    scheduleTotal: 10,
-    schedulePercent: 0.5,
-    withdrawals: 5,
-    withdrawalsPercent: 0.15,
-  },
-]);
-
-const data = computed(() => {
-  return promoData.value.map((record) => Object.values(record));
+const props = defineProps({
+  title: String,
+  fields: Array,
+  data: Array,
 });
 
-const titleColspan = computed(() => fields.length - 1);
+const dataArr = computed(() => {
+  return props.data.map((record) => Object.values(record));
+});
+
+const titleColspan = computed(() => props.fields.length - 1);
 
 function formatField(value, config) {
   const { format = 'string', scale = 1 } = config;
@@ -157,7 +20,7 @@ function formatField(value, config) {
     currency: formatCurrency,
     percent: formatPercent,
     string: (val) => val,
-    integer: (val) => val,
+    integer: (val) => val.toFixed(0),
     decimal: (val) => val.toFixed(scale),
   };
   return FORMATTERS?.[format]?.(value) ?? value;
@@ -194,18 +57,7 @@ function formatPercent(value, precision = 0) {
     </thead>
 
     <tbody>
-      <!-- <tr v-for="data in promoData" :key="data.locationName">
-        <td>{{ data.locationName }}</td>
-        <td>{{ formatCurrency(data.salesTotal) }}</td>
-        <td>{{ formatCurrency(data.salesGoal) }}</td>
-        <td>{{ formatPercent(data.goalPercent) }}</td>
-        <td>{{ formatCurrency(data.salesAverage) }}</td>
-        <td>{{ data.scheduleTotal }}</td>
-        <td>{{ formatPercent(data.schedulePercent) }}</td>
-        <td>{{ data.withdrawals }}</td>
-        <td>{{ formatPercent(data.schedulePercent) }}</td>
-      </tr> -->
-      <tr v-for="(record, recordIndex) in data" :key="recordIndex">
+      <tr v-for="(record, recordIndex) in dataArr" :key="recordIndex">
         <td v-for="(fieldValue, fieldIndex) in record" :key="fieldIndex">
           {{ formatField(fieldValue, fields[fieldIndex]) }}
         </td>
