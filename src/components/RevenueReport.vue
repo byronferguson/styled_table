@@ -138,7 +138,10 @@ const topData = [
     locationName: '«Location Name»',
     activeRevenue: 250000,
     newRevenue: 20000,
-    deferredRevenue: 10000,
+    deferredRevenue: {
+      value: 10000,
+      tooltip: '$9K Jun $1K May',
+    },
     totalRevenue: 280000,
     futureRevenue: 30000,
   },

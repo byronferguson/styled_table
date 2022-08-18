@@ -8,10 +8,6 @@ const props = defineProps({
   data: Array,
 });
 
-const fieldsArr = computed(() => {
-  return props.fields.slice(1);
-});
-
 const dataArr = computed(() => {
   return props.data.map((record) => Object.values(record));
 });
@@ -30,6 +26,10 @@ const titleRowSpan = computed(() => {
 
 const colWidth = computed(() => `${100 / props.fields.length}%`);
 
+function isPrimitiveValue(value) {
+  return ['number', 'string'].includes(typeof value);
+}
+
 function formatField(value, config) {
   const { format = 'string', scale = 2 } = config;
 
@@ -40,6 +40,7 @@ function formatField(value, config) {
     integer: (val) => val.toFixed(0),
     decimal: (val, scale) => val.toFixed(scale),
   };
+
   return FORMATTERS?.[format]?.(value, scale) ?? value;
 }
 
@@ -131,8 +132,12 @@ function formatPercent(value, scale = 0) {
           :is="fieldIndex === 0 ? 'th' : 'td'"
           v-for="(fieldValue, fieldIndex) in record"
           :key="fieldIndex"
+          :class="{ tooltip: fieldValue.tooltip }"
         >
-          {{ formatField(fieldValue, fields[fieldIndex]) }}
+          <template v-if="isPrimitiveValue(fieldValue)">
+            {{ formatField(fieldValue, fields[fieldIndex]) }}
+          </template>
+          <template v-else> ¿? </template>
         </component>
       </tr>
     </tbody>
@@ -168,6 +173,7 @@ th,
 td {
   padding: 8px;
   border: 2px solid white;
+  position: relative;
 }
 
 thead th {
@@ -246,5 +252,23 @@ tbody tr:hover th {
 tbody tr:hover td {
   background-color: #ffcf34;
   font-weight: 900;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip:after {
+  --tooltip-color: #2157d6;
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  display: block;
+  border-left: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-top: 12px solid var(--tooltip-color);
 }
 </style>
