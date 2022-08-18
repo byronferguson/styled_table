@@ -20,34 +20,65 @@ const titleColspan = computed(() => props.fields.length - 1);
 const colWidth = computed(() => `${100 / props.fields.length}%`);
 
 function formatField(value, config) {
-  const { format = 'string', scale = 1 } = config;
+  const { format = 'string', scale = 0 } = config;
 
   const FORMATTERS = {
-    currency: formatCurrency,
+    currency: (val, scale) => formatCurrency(val, scale),
     currencyCompact: formatCurrencyCompact,
     percent: formatPercent,
-    string: (val) => val,
     integer: (val) => val.toFixed(0),
-    decimal: (val) => val.toFixed(scale),
+    decimal: (val, scale) => val.toFixed(scale),
   };
-  return FORMATTERS?.[format]?.(value) ?? value;
+  return FORMATTERS?.[format]?.(value, scale) ?? value;
 }
 
-function formatCurrency(value, currency = 'USD', i18n = 'en-US') {
-  return new Intl.NumberFormat(i18n, {
+function formatCurrency(value, scale, currency = 'USD', i18n = 'en-US') {
+  const integerFormatter = new Intl.NumberFormat(i18n, {
     style: 'currency',
     currency,
-  }).format(value);
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+
+  const fractionFormatter = new Intl.NumberFormat(i18n, {
+    style: 'currency',
+    currency,
+    minimumFractionDigits: 2,
+  });
+
+  return value % 1 === 0
+    ? integerFormatter.format(value)
+    : fractionFormatter.format(value)
 }
 
 // Currently "dumb" for only thousands
-function formatCurrencyCompact(value) {
-  const _value = Math.floor(value / 1000);
-  return `$${_value}K`;
+function formatCurrencyCompact(value, scale = 0) {
+  let suffix;
+  let _value;
+
+  const kValue = value / 1000;
+  const mValue = kValue / 1000;
+
+  if (mValue >= 1) {
+    _value = mValue;
+    suffix = 'M';
+  } else {
+    _value = kValue;
+    suffix = 'K';
+  }
+
+  const fixedValue = new Intl.NumberFormat('en-us', {
+    maximumFractionDigits: scale,
+  }).format(_value);
+
+  return '$' + fixedValue + suffix;
 }
 
-function formatPercent(value, precision = 0) {
-  return (value * 100).toFixed(precision) + '%';
+function formatPercent(value, scale = 0) {
+  return new Intl.NumberFormat('en-us', {
+    style: 'percent',
+    maximumFractionDigits: scale,
+  }).format(value);
 }
 </script>
 

@@ -67,7 +67,7 @@ const fields = [
 const data = [
   {
     locationName: 'Buffalo Grove',
-    salesTotal: 90,
+    salesTotal: 90.5,
     salesGoal: 100,
     goalPercent: 0.9,
     salesAverage: 10,

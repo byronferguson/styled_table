@@ -12,6 +12,7 @@ const fields = [
     title: 'Baby Blue Rev',
     hint: '',
     format: 'currencyCompact',
+    scale: 2,
     color: 'red',
   },
   {
@@ -36,17 +37,18 @@ const fields = [
     title: 'Total Revenue',
     hint: '',
     format: 'currencyCompact',
+    scale: 2,
   },
 ];
 
 const data = [
   {
     shiftName: 'Weekend AM',
-    babyBlueRevenue: 5000,
+    babyBlueRevenue: 5500,
     brightBlueRevenue: 40000,
     boldBlueRevenue: 40000,
     bigBlueRevenue: 15000,
-    totalRevenue: 100000,
+    totalRevenue: 1111001,
   },
   {
     shiftName: 'Weekend AM',
