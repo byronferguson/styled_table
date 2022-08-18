@@ -20,7 +20,7 @@ const titleColspan = computed(() => props.fields.length - 1);
 const colWidth = computed(() => `${100 / props.fields.length}%`);
 
 function formatField(value, config) {
-  const { format = 'string', scale = 0 } = config;
+  const { format = 'string', scale = 2 } = config;
 
   const FORMATTERS = {
     currency: (val, scale) => formatCurrency(val, scale),
@@ -48,11 +48,11 @@ function formatCurrency(value, scale, currency = 'USD', i18n = 'en-US') {
 
   return value % 1 === 0
     ? integerFormatter.format(value)
-    : fractionFormatter.format(value)
+    : fractionFormatter.format(value);
 }
 
 // Currently "dumb" for only thousands
-function formatCurrencyCompact(value, scale = 0) {
+function formatCurrencyCompact(value, scale = 2) {
   let suffix;
   let _value;
 

@@ -6,36 +6,36 @@ const title = 'Revenue Report';
 const fields = [
   {
     title: 'Shift',
-    hint: '',
+    tooltip: '',
   },
   {
     title: 'Baby Blue Rev',
-    hint: '',
+    tooltip: '',
     format: 'currencyCompact',
     scale: 2,
     color: 'red',
   },
   {
     title: 'Bright Blue Rev',
-    hint: '',
+    tooltip: '',
     format: 'currencyCompact',
     color: 'yellow',
   },
   {
     title: 'Bold Blue Rev',
-    hint: '',
+    tooltip: '',
     format: 'currencyCompact',
     color: 'light-blue',
   },
   {
     title: 'Big Blue Rev',
-    hint: '',
+    tooltip: '',
     format: 'currencyCompact',
     color: 'blue',
   },
   {
     title: 'Total Revenue',
-    hint: '',
+    tooltip: '',
     format: 'currencyCompact',
     scale: 2,
   },
@@ -83,10 +83,58 @@ const data = [
     totalRevenue: 100000,
   },
 ];
+
+const topFields = [
+  {
+    title: 'Location(s)',
+  },
+  {
+    title: 'Active Revenue',
+    tooltip: 'Revenue received on the 1st for lessons occuring this month',
+    format: 'currencyCompact',
+    color: 'blue',
+  },
+  {
+    title: 'New Revenue',
+    tooltip: 'Revenue received mid-month for lesson occurring this month',
+    format: 'currencyCompact',
+    color: 'blue',
+  },
+  {
+    title: 'Deferred Revenue',
+    tooltip: 'Revenue previously received for lessons occuring this month',
+    format: 'currencyCompact',
+    color: 'blue',
+  },
+  {
+    title: 'Total Revenue',
+    tooltip: 'Total revenue received for the lessons occurring this month',
+    format: 'currencyCompact',
+    color: 'blue',
+  },
+  {
+    title: 'Future Revenue',
+    tooltip: 'Revenue received mid-month for lessons in future months',
+    format: 'currencyCompact',
+    color: 'yellow',
+  },
+];
+
+const topData = [
+  {
+    locationName: 'Location Name',
+    activeRevenue: 250000,
+    newRevenue: 20000,
+    deferredRevenue: 10000,
+    totalRevenue: 280000,
+    futureRevenue: 30000,
+  },
+];
 </script>
 
 <template>
   <main>
+    <Table :fields="topFields" :data="topData" class="mb-16" />
     <Table :fields="fields" :data="data" />
   </main>
 </template>
