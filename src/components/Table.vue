@@ -17,7 +17,7 @@ const dataArr = computed(() => {
 
 const titleColspan = computed(() => props.fields.length - 1);
 
-const colWidth = computed(() => 100 / props.fields.length);
+const colWidth = computed(() => `${100 / props.fields.length}%`);
 
 function formatField(value, config) {
   const { format = 'string', scale = 1 } = config;
@@ -140,7 +140,7 @@ thead th[data-color='light-blue'] {
 
 thead th[data-color='red'] {
   background-color: #f8564b;
-  color: white;
+  color: #1f145d;
 }
 
 thead th[data-color='pink'] {
