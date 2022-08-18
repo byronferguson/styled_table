@@ -17,6 +17,8 @@ const dataArr = computed(() => {
 
 const titleColspan = computed(() => props.fields.length - 1);
 
+const colWidth = computed(() => 100 / props.fields.length);
+
 function formatField(value, config) {
   const { format = 'string', scale = 1 } = config;
 
@@ -89,6 +91,7 @@ table {
   border-style: hidden;
   text-align: center;
   vertical-align: middle;
+  width: 100%;
 }
 
 caption {
@@ -102,7 +105,7 @@ caption {
 thead {
   background-color: #1f145d;
   color: white;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 900;
 }
 
@@ -113,7 +116,11 @@ td {
 }
 
 thead th {
-  width: 11%;
+  width: v-bind(colWidth);
+}
+
+thead tr:first-of-type th:first-of-type {
+  text-align: left;
 }
 
 thead th[data-color='dark-blue'] {

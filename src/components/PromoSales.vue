@@ -5,7 +5,7 @@ const title = 'Promo Sales';
 
 const fields = [
   {
-    title: 'Locations',
+    title: 'Location(s)',
     hint: '',
   },
   {

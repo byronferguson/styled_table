@@ -85,6 +85,6 @@ const data = [
 
 <template>
   <main>
-    <Table :title="title" :fields="fields" :data="data" />
+    <Table :fields="fields" :data="data" />
   </main>
 </template>
