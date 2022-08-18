@@ -135,7 +135,7 @@ const topFieldDescriptions = [
 
 const topData = [
   {
-    locationName: 'Location Name',
+    locationName: '«Location Name»',
     activeRevenue: 250000,
     newRevenue: 20000,
     deferredRevenue: 10000,
