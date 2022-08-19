@@ -125,14 +125,6 @@ const topFields = [
   },
 ];
 
-const topFieldDescriptions = [
-  'Revenue received on the 1st for lessons occuring this month',
-  'Revenue received mid-month for lesson occurring this month',
-  'Revenue previously received for lessons occuring this month',
-  'Total revenue received for the lessons occurring this month',
-  'Revenue received mid-month for lessons in future months',
-];
-
 const topData = [
   {
     locationName: '«Location Name»',
