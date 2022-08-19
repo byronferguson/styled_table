@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, defineProps } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
   title: String,
@@ -132,13 +132,28 @@ function formatPercent(value, scale = 0) {
           :is="fieldIndex === 0 ? 'th' : 'td'"
           v-for="(fieldValue, fieldIndex) in record"
           :key="fieldIndex"
-          :class="{ tooltip: fieldValue.tooltip }"
+          v-tooltip="{ text: fieldValue?.tooltip ?? '', displayArrow: true }"
         >
           <template v-if="isPrimitiveValue(fieldValue)">
             {{ formatField(fieldValue, fields[fieldIndex]) }}
           </template>
           <template v-else>
-            {{ formatField(fieldValue.value, fields[fieldIndex]) }}
+            <div class="flex justify-center align-center">
+              <span>{{
+                formatField(fieldValue.value, fields[fieldIndex])
+              }}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-3 w-3 fill-red-600"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
           </template>
         </component>
       </tr>

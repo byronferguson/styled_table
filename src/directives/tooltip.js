@@ -1,3 +1,7 @@
+/**
+ * https://github.com/maciejziemichod/v-tooltip?ref=morioh.com&utm_source=morioh.com
+ */
+
 export default {
   updateTooltip(el, { value, modifiers }) {
     if (typeof value === 'string') {
