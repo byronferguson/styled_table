@@ -16,29 +16,29 @@ const hasSubTitles = computed(() =>
   props.fields.some((field) => field.subTitle)
 );
 
-const hasChildren = computed(() =>
-  props.fields.some((field) => field.children)
+const hasDataFields = computed(() =>
+  props.fields.some((field) => field.dataFields)
 );
 
 const fieldCount = computed(() => {
-  if (!hasChildren.value) return props.fields.length;
+  if (!hasDataFields.value) return props.fields.length;
 
   return props.fields.reduce(
-    (count, field) => count + (field?.children?.length ?? 1),
+    (count, field) => count + (field?.dataFields?.length ?? 1),
     0
   );
 });
 
 const dataFields = computed(() => {
-  if (!hasChildren.value) return props.fields;
+  if (!hasDataFields.value) return props.fields;
 
   return props.fields.reduce((fields, field) => {
-    const children = field?.children?.map((child) => ({
+    const dataFields = field?.dataFields?.map((child) => ({
       ...child,
       color: `${field.color}/40`,
     })) ?? [field];
 
-    return [...fields, ...children];
+    return [...fields, ...dataFields];
   }, []);
 });
 
@@ -56,7 +56,7 @@ function isPrimitiveValue(value) {
   return ['number', 'string'].includes(typeof value);
 }
 
-function formatField(value, config) {
+function formatField(value, config = {}) {
   const { format = 'string', scale = 2 } = config;
 
   const FORMATTERS = {
@@ -132,7 +132,7 @@ function formatPercent(value, scale = 0) {
       </tr>
 
       <!-- Group Field Row -->
-      <tr v-if="hasChildren">
+      <tr v-if="hasDataFields">
         <th
           v-if="!title"
           :rowspan="titleRowSpan"
@@ -143,7 +143,7 @@ function formatPercent(value, scale = 0) {
         <th
           v-for="(group, groupIndex) in fields.slice(1)"
           :key="`group-${groupIndex}`"
-          :colspan="group?.children?.length ?? 1"
+          :colspan="group?.dataFields?.length ?? 1"
           :data-color="group.color"
         >
           {{ group.title }}
@@ -206,7 +206,7 @@ function formatPercent(value, scale = 0) {
           v-tooltip="{ text: fieldValue?.tooltip ?? '', displayArrow: true }"
         >
           <template v-if="isPrimitiveValue(fieldValue)">
-            {{ formatField(fieldValue, fields[fieldIndex]) }}
+            {{ formatField(fieldValue, dataFields[fieldIndex]) }}
           </template>
           <template v-else>
             <div class="flex justify-center align-center space-x-1">
