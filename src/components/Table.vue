@@ -16,15 +16,41 @@ const hasSubTitles = computed(() =>
   props.fields.some((field) => field.subTitle)
 );
 
+const hasChildren = computed(() =>
+  props.fields.some((field) => field.children)
+);
+
+const fieldCount = computed(() => {
+  if (!hasChildren.value) return props.fields.length;
+
+  return props.fields.reduce(
+    (count, field) => count + (field?.children?.length ?? 1),
+    0
+  );
+});
+
+const dataFields = computed(() => {
+  if (!hasChildren.value) return props.fields;
+
+  return props.fields.reduce((fields, field) => {
+    const children = field?.children?.map((child) => ({
+      ...child,
+      color: `${field.color}/50`,
+    })) ?? [field];
+
+    return [...fields, ...children];
+  }, []);
+});
+
 const titleColSpan = computed(() => props.fields.length - 1);
 const titleRowSpan = computed(() => {
-  const initialSpan = props.title ? 2 : 1;
+  const initialSpan = props.title ? 3 : 2;
   const subTitleOffest = hasSubTitles.value ? 1 : 0;
 
   return initialSpan + subTitleOffest;
 });
 
-const colWidth = computed(() => `${100 / props.fields.length}%`);
+const colWidth = computed(() => `${100 / fieldCount.value}%`);
 
 function isPrimitiveValue(value) {
   return ['number', 'string'].includes(typeof value);
@@ -97,18 +123,29 @@ function formatPercent(value, scale = 0) {
 </script>
 
 <template>
+  dataFields: {{ dataFields }}
   <table>
     <thead>
+      <!-- Title Row -->
       <tr v-if="title">
         <th :rowspan="titleRowSpan">{{ fields[0].title }}</th>
         <th :colspan="titleColSpan">{{ title }}</th>
       </tr>
+
+      <!-- Group Field Row -->
+      <tr></tr>
+
+      <!-- Data Field Row -->
       <tr>
-        <th v-if="!title" :rowspan="titleRowSpan">
-          {{ fields[0].title }}
+        <th
+          v-if="!title"
+          :rowspan="titleRowSpan"
+          :data-color="dataFields[0].color"
+        >
+          {{ dataFields[0].title }}
         </th>
         <th
-          v-for="(field, fieldIndex) in fields.slice(1)"
+          v-for="(field, fieldIndex) in dataFields.slice(1)"
           :key="`${field.title}-${fieldIndex}`"
           :data-group="field.group"
           :data-color="field.color"
@@ -133,6 +170,8 @@ function formatPercent(value, scale = 0) {
           </div>
         </th>
       </tr>
+
+      <!-- Sub-Title Row -->
       <tr v-if="hasSubTitles">
         <td
           v-for="(field, fieldIndex) in fields.slice(1)"
@@ -189,7 +228,7 @@ table {
 }
 
 thead {
-  @apply bg-primary-dark;
+  @apply bg-white;
   color: white;
   font-size: 1rem;
   font-weight: 900;
@@ -207,6 +246,10 @@ th {
   font-weight: 600;
 }
 
+thead th {
+  @apply bg-primary-dark;
+}
+
 thead td {
   @apply bg-slate-300 text-primary-dark;
   font-size: 0.85rem;
@@ -217,28 +260,56 @@ thead tr:first-of-type th:first-of-type {
   text-align: left;
 }
 
+thead th[data-color='white'] {
+  @apply text-primary-dark bg-white;
+}
+
 thead th[data-color='dark-blue'] {
   @apply text-white bg-primary-dark;
+}
+
+thead th[data-color='dark-blue/50'] {
+  @apply text-primary-dark bg-primary-dark/50;
 }
 
 thead th[data-color='blue'] {
   @apply text-white bg-primary;
 }
 
+thead th[data-color='blue/50'] {
+  @apply text-primary-dark bg-primary/50;
+}
+
 thead th[data-color='light-blue'] {
   @apply text-primary-dark bg-primary-light;
+}
+
+thead th[data-color='light-blue/50'] {
+  @apply text-primary-dark bg-primary-light/50;
 }
 
 thead th[data-color='red'] {
   @apply text-primary-dark bg-secondary;
 }
 
+thead th[data-color='red/50'] {
+  @apply text-primary-dark bg-secondary/50;
+}
+
 thead th[data-color='pink'] {
   @apply text-primary-dark bg-secondary-light;
 }
 
+thead th[data-color='pink/50'] {
+  @apply text-primary-dark bg-secondary-light/50;
+}
+
 thead th[data-color='yellow'] {
   @apply text-primary-dark bg-accent;
+}
+
+thead th[data-color='yellow/50'] {
+  @apply text-primary-dark bg-accent/50;
 }
 
 tbody th {
