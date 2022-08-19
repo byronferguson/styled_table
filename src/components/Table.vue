@@ -35,7 +35,7 @@ const dataFields = computed(() => {
   return props.fields.reduce((fields, field) => {
     const children = field?.children?.map((child) => ({
       ...child,
-      color: `${field.color}/50`,
+      color: `${field.color}/40`,
     })) ?? [field];
 
     return [...fields, ...children];
@@ -123,7 +123,6 @@ function formatPercent(value, scale = 0) {
 </script>
 
 <template>
-  dataFields: {{ dataFields }}
   <table>
     <thead>
       <!-- Title Row -->
@@ -145,6 +144,7 @@ function formatPercent(value, scale = 0) {
           v-for="(group, groupIndex) in fields.slice(1)"
           :key="`group-${groupIndex}`"
           :colspan="group?.children?.length ?? 1"
+          :data-color="group.color"
         >
           {{ group.title }}
         </th>
@@ -283,48 +283,48 @@ thead th[data-color='dark-blue'] {
   @apply text-white bg-primary-dark;
 }
 
-thead th[data-color='dark-blue/50'] {
-  @apply text-primary-dark bg-primary-dark/50;
+thead th[data-color='dark-blue/40'] {
+  @apply text-primary-dark bg-primary-dark/40;
 }
 
 thead th[data-color='blue'] {
   @apply text-white bg-primary;
 }
 
-thead th[data-color='blue/50'] {
-  @apply text-primary-dark bg-primary/50;
+thead th[data-color='blue/40'] {
+  @apply text-primary-dark bg-primary/40;
 }
 
 thead th[data-color='light-blue'] {
   @apply text-primary-dark bg-primary-light;
 }
 
-thead th[data-color='light-blue/50'] {
-  @apply text-primary-dark bg-primary-light/50;
+thead th[data-color='light-blue/40'] {
+  @apply text-primary-dark bg-primary-light/40;
 }
 
 thead th[data-color='red'] {
   @apply text-primary-dark bg-secondary;
 }
 
-thead th[data-color='red/50'] {
-  @apply text-primary-dark bg-secondary/50;
+thead th[data-color='red/40'] {
+  @apply text-primary-dark bg-secondary/40;
 }
 
 thead th[data-color='pink'] {
   @apply text-primary-dark bg-secondary-light;
 }
 
-thead th[data-color='pink/50'] {
-  @apply text-primary-dark bg-secondary-light/50;
+thead th[data-color='pink/40'] {
+  @apply text-primary-dark bg-secondary-light/40;
 }
 
 thead th[data-color='yellow'] {
   @apply text-primary-dark bg-accent;
 }
 
-thead th[data-color='yellow/50'] {
-  @apply text-primary-dark bg-accent/50;
+thead th[data-color='yellow/40'] {
+  @apply text-primary-dark bg-accent/40;
 }
 
 tbody th {
