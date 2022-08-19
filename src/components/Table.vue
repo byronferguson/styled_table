@@ -138,13 +138,13 @@ function formatPercent(value, scale = 0) {
             {{ formatField(fieldValue, fields[fieldIndex]) }}
           </template>
           <template v-else>
-            <div class="flex justify-center align-center">
+            <div class="flex justify-center align-center space-x-1">
               <span>{{
                 formatField(fieldValue.value, fields[fieldIndex])
               }}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-3 w-3 fill-red-600"
+                class="h-3 w-3 fill-primary-dark"
                 viewBox="0 0 20 20"
               >
                 <path
@@ -161,9 +161,9 @@ function formatPercent(value, scale = 0) {
   </table>
 </template>
 
-<style lang="postcss">
+<style scoped lang="postcss">
 table {
-  color: #1f145d;
+  @apply text-primary-dark;
   border-collapse: collapse;
   border-style: hidden;
   text-align: center;
@@ -171,16 +171,8 @@ table {
   width: 100%;
 }
 
-caption {
-  font-weight: bold;
-  font-size: 24px;
-  text-align: left;
-  color: #333;
-  margin-bottom: 16px;
-}
-
 thead {
-  background-color: #1f145d;
+  @apply bg-primary-dark;
   color: white;
   font-size: 1rem;
   font-weight: 900;
@@ -198,8 +190,7 @@ thead th {
 }
 
 thead td {
-  background-color: #ccc;
-  color: #1f145d;
+  @apply bg-slate-300 text-primary-dark;
   font-size: 0.85rem;
   font-weight: 400;
 }
@@ -209,33 +200,27 @@ thead tr:first-of-type th:first-of-type {
 }
 
 thead th[data-color='dark-blue'] {
-  background-color: #1f145d;
-  color: white;
+  @apply text-white bg-primary-dark;
 }
 
 thead th[data-color='blue'] {
-  background-color: #2157d6;
-  color: white;
+  @apply text-white bg-primary;
 }
 
 thead th[data-color='light-blue'] {
-  background-color: #99e3fa;
-  color: #1f145d;
+  @apply text-primary-dark bg-primary-light;
 }
 
 thead th[data-color='red'] {
-  background-color: #f8564b;
-  color: #1f145d;
+  @apply text-primary-dark bg-secondary;
 }
 
 thead th[data-color='pink'] {
-  background-color: #ffd0d3;
-  color: #1f145d;
+  @apply text-primary-dark bg-secondary-light;
 }
 
 thead th[data-color='yellow'] {
-  background-color: #ffcf34;
-  color: #1f145d;
+  @apply text-primary-dark bg-accent;
 }
 
 tbody th {
@@ -243,14 +228,15 @@ tbody th {
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #eee;
+  @apply bg-slate-100;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #ccc;
+  @apply bg-slate-300;
 }
 
-/* tbody th {
+/* Adds/alternates first field
+tbody th {
   background-color: #36c;
   color: white;
   text-align: left;
@@ -261,16 +247,15 @@ tbody tr:nth-child(even) th {
 } */
 
 tbody tr:hover th {
-  background-color: #ffcf34;
-  font-weight: 900;
-  color: #1f145d;
+  @apply bg-accent;
 }
 
 tbody tr:hover td {
-  background-color: #ffcf34;
-  font-weight: 900;
+  @apply bg-accent;
+  font-weight: 600;
 }
 
+/** Adds upper-right triangle to element
 .tooltip {
   position: relative;
 }
@@ -287,5 +272,5 @@ tbody tr:hover td {
   border-left: 12px solid transparent;
   border-bottom: 12px solid transparent;
   border-top: 12px solid var(--tooltip-color);
-}
+} */
 </style>
