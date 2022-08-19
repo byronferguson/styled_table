@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
 import tooltip from './directives/tooltip';
 import App from './App.vue';
-import './index.css';
-import './assets/tooltip.css';
+import './assets/css/tailwind.pcss';
+import './assets/css/tooltip.css';
 
 const app = createApp(App);
 
