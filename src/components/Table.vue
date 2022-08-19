@@ -44,7 +44,7 @@ const dataFields = computed(() => {
 
 const titleColSpan = computed(() => props.fields.length - 1);
 const titleRowSpan = computed(() => {
-  const initialSpan = props.title ? 3 : 2;
+  const initialSpan = props.title ? 2 : 1;
   const subTitleOffest = hasSubTitles.value ? 1 : 0;
 
   return initialSpan + subTitleOffest;
@@ -133,7 +133,22 @@ function formatPercent(value, scale = 0) {
       </tr>
 
       <!-- Group Field Row -->
-      <tr></tr>
+      <tr v-if="hasChildren">
+        <th
+          v-if="!title"
+          :rowspan="titleRowSpan"
+          :data-color="dataFields[0].color"
+        >
+          {{ dataFields[0].title }}
+        </th>
+        <th
+          v-for="(group, groupIndex) in fields.slice(1)"
+          :key="`group-${groupIndex}`"
+          :colspan="group?.children?.length ?? 1"
+        >
+          {{ group.title }}
+        </th>
+      </tr>
 
       <!-- Data Field Row -->
       <tr>
