@@ -185,8 +185,9 @@ td {
   position: relative;
 }
 
-thead th {
+th {
   width: v-bind(colWidth);
+  font-weight: 600;
 }
 
 thead td {
@@ -236,15 +237,16 @@ tbody tr:nth-child(even) {
 }
 
 /* Adds/alternates first field
+ * not loving the look
 tbody th {
-  background-color: #36c;
-  color: white;
+  @apply bg-slate-300;
   text-align: left;
 }
 
 tbody tr:nth-child(even) th {
-  background-color: #25c;
-} */
+  @apply bg-slate-100;
+}
+*/
 
 tbody tr:hover th {
   @apply bg-accent;
