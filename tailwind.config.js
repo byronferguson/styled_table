@@ -1,25 +1,24 @@
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
     fontFamily: {
-      sans: [
-        'Inter',
-        'Avenir',
-        'Roboto',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Ubuntu',
-        '"Helvetica Neue"',
-        'Arial',
-        '"Noto Sans"',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
-      ],
+      sans: ['Gibson', ...fontFamily.sans],
+      serif: ['Midnight Chalker', ...fontFamily.serif],
+      display: ['Gibson', ...fontFamily.sans],
+      body: ['Gibson', ...fontFamily.sans],
+    },
+    extend: {
+      colors: {
+        'primary-dark': '#1F145D',
+        primary: '#2157D6',
+        'primary-light': '#99E3FA',
+        secondary: '#F8564B',
+        'secondary-light': '#FFD0D3',
+        accent: '#FFCF34',
+      },
+      screens: {
+        '2xl': '1440px',
+      },
     },
   },
   plugins: [],
