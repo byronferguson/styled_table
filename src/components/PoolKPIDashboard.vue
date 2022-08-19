@@ -10,18 +10,22 @@ const fields = [
   },
   {
     title: 'Financial Performance',
-    format: 'currency',
-    scale: 0,
     color: 'dark-blue',
     children: [
       {
         title: 'Total Revenue',
+        format: 'currency',
+        scale: 0,
       },
       {
         title: 'ARPU',
+        format: 'currency',
+        scale: 0,
       },
       {
         title: 'VC % of Rev',
+        format: 'currency',
+        scale: 0,
       },
     ],
   },
@@ -33,15 +37,23 @@ const fields = [
     children: [
       {
         title: 'ATLs',
+        format: 'currency',
+        scale: 0,
       },
       {
         title: 'AWLs',
+        format: 'currency',
+        scale: 0,
       },
       {
         title: 'Net Lessons',
+        format: 'currency',
+        scale: 0,
       },
       {
         title: 'Churn Rate',
+        format: 'currency',
+        scale: 0,
       },
     ],
   },
@@ -53,9 +65,13 @@ const fields = [
     children: [
       {
         title: 'Attended Trials',
+        format: 'currency',
+        scale: 0,
       },
       {
         title: 'Total Trial Conversions',
+        format: 'currency',
+        scale: 0,
       },
     ],
   },
@@ -66,15 +82,23 @@ const fields = [
     children: [
       {
         title: 'Deployed Capacity',
+        format: 'currency',
+        scale: 0,
       },
       {
         title: 'ATL Capacity Utilization',
+        format: 'currency',
+        scale: 0,
       },
       {
         title: 'AQL Capacity Utilization',
+        format: 'currency',
+        scale: 0,
       },
       {
         title: 'NPS Score',
+        format: 'currency',
+        scale: 0,
       },
     ],
   },

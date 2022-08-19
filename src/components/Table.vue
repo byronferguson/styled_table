@@ -211,7 +211,7 @@ function formatPercent(value, scale = 0) {
           <template v-else>
             <div class="flex justify-center align-center space-x-1">
               <span>{{
-                formatField(fieldValue.value, fields[fieldIndex])
+                formatField(fieldValue.value, dataFields[fieldIndex])
               }}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
