@@ -6,7 +6,7 @@ const title = 'Promo Sales';
 const fields = [
   {
     title: '',
-    color: 'white',
+    color: 'dark-blue',
   },
   {
     title: 'Financial Performance',
@@ -14,16 +14,22 @@ const fields = [
     dataFields: [
       {
         title: 'Total Revenue',
+        subtitle: 'Revenue',
+        tooltip: 'Total Revenue',
         format: 'currency',
         scale: 0,
       },
       {
         title: 'ARPU',
+        subtitle: 'N/A',
+        tooltip: 'Revenue / (WLs + DIs)',
         format: 'currency',
         scale: 0,
       },
       {
         title: 'VC % of Rev',
+        subtitle: 'Discuss',
+        tooltip: 'Total VC / Total Revenue',
         format: 'percent',
         scale: 0,
       },
@@ -35,18 +41,25 @@ const fields = [
     dataFields: [
       {
         title: 'ATLs',
+        subtitle: 'Enrollment Status',
+        tooltip: '',
         format: 'integer',
       },
       {
         title: 'AWLs',
+        subtitle: 'Enrollment History',
         format: 'integer',
       },
       {
         title: 'Net Lessons',
+        subtitle: 'Enrollment History',
+        tooltip: 'Lessons Started - Lessons Stopped',
         format: 'integer',
       },
       {
         title: 'Churn Rate',
+        subtitle: 'Enrollment History',
+        tooltip: 'Lessons Stopped / AWLs',
         format: 'percent',
         scale: 2,
       },
@@ -58,10 +71,13 @@ const fields = [
     dataFields: [
       {
         title: 'Attended Trials',
+        subtitle: 'Scheduled Trials',
         format: 'integer',
       },
       {
         title: 'Total Trial Conversions',
+        subtitle: 'Scheduled Trials',
+        tooltip: 'Trials Converted / Trials Attended',
         format: 'integer',
       },
     ],
@@ -72,21 +88,29 @@ const fields = [
     dataFields: [
       {
         title: 'Deployed Capacity',
+        subtitle: 'Capacity Planning',
+        tooltip: 'Deployed Capacity',
         format: 'decimal',
         scale: 1,
       },
       {
         title: 'ATL Capacity Utilization',
+        subtitle: 'Enrollment Status',
+        tooltip: 'ATL / Deployed Capacity',
         format: 'percent',
         scale: 2,
       },
       {
         title: 'AQL Capacity Utilization',
+        subtitle: 'Enrollment Status',
+        tooltip: 'AWL / Deployed Capacity',
         format: 'percent',
         scale: 2,
       },
       {
         title: 'NPS Score',
+        subtitle: 'Listen360',
+        tooltip: '1-Month NPS or 3-Month NPS?',
         format: 'decimal',
         scale: 2,
       },

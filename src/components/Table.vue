@@ -12,8 +12,8 @@ const dataArr = computed(() => {
   return props.data.map((record) => Object.values(record));
 });
 
-const hasSubTitles = computed(() =>
-  props.fields.some((field) => field.subTitle)
+const hasSubtitles = computed(() =>
+  dataFields.value.some((field) => field.subtitle)
 );
 
 const hasDataFields = computed(() =>
@@ -45,9 +45,10 @@ const dataFields = computed(() => {
 const titleColSpan = computed(() => props.fields.length - 1);
 const titleRowSpan = computed(() => {
   const initialSpan = props.title ? 2 : 1;
-  const subTitleOffest = hasSubTitles.value ? 1 : 0;
+  const dataFieldOffset = hasDataFields.value ? 1 : 0;
+  const subTitleOffset = hasSubtitles.value ? 1 : 0;
 
-  return initialSpan + subTitleOffest;
+  return initialSpan + dataFieldOffset + subTitleOffset;
 });
 
 const colWidth = computed(() => `${100 / fieldCount.value}%`);
@@ -153,7 +154,7 @@ function formatPercent(value, scale = 0) {
       <!-- Data Field Row -->
       <tr>
         <th
-          v-if="!title"
+          v-if="!title && !hasDataFields"
           :rowspan="titleRowSpan"
           :data-color="dataFields[0].color"
         >
@@ -186,13 +187,13 @@ function formatPercent(value, scale = 0) {
         </th>
       </tr>
 
-      <!-- Sub-Title Row -->
-      <tr v-if="hasSubTitles">
+      <!-- Subtitle Row -->
+      <tr v-if="hasSubtitles">
         <td
-          v-for="(field, fieldIndex) in fields.slice(1)"
+          v-for="(field, fieldIndex) in dataFields.slice(1)"
           :key="`${field.title}-${fieldIndex}`"
         >
-          {{ field.subTitle }}
+          {{ field.subtitle }}
         </td>
       </tr>
     </thead>
